@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <div th:include="fragments/components::header"></div>
+</head>
+<body>
+<div class="container mt-5">
+    <div class="shadow p-3 mb-5 bg-body rounded">
+        <form method="POST" class="form-signin"  th:action="@{/B2BPage}">
+
+            <h2 class="form-heading text-center">Edit Products</h2>
+
+            <div th:object="${productSpec}" class="form-group">
+                <!-- Username -->
+                <div class="form-floating mb-3">
+                    <input id="productNameInput"
+                           name="productName"
+                           type="text"
+                           class="form-control"
+                           placeholder="Product Name"
+                           th:field="*{productName}"
+                           autofocus="true">
+                    <label for="productNameInput">Product Name</label>
+                    <span class="has-error" th:if="${#fields.hasErrors('productName')}" th:errors="*{productName}"></span>
+                </div>
+
+                <!-- quantity -->
+                <div class="form-floating mb-3">
+                    <input id="quantityInput"
+                           name="quantity"
+                           type="text"
+                           class="form-control"
+                           placeholder="Quantity"
+                           th:field="*{quantity}"
+                           autofocus="true">
+                    <label for="quantityInput">Quantity</label>
+                    <span class="has-error" th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}"></span>
+                </div>
+            </div>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+
+            <!-- Login/Register -->
+
+
+        </form>
+
+    <table class="table">
+        <thread class="thead-dark">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Quantity</th>
+        </tr>
+        </thread>
+        <tr th:each="product : ${products}">
+            <td th:text="${product.idProduct}"></td>
+            <td th:text="${product.productName}"></td>
+            <td th:text="${product.quantity}"></td>
+        </tr>
+    </table>
+    <div
+            th:if="${products.empty}">
+    </div>
+
+    <div class="text-center text-lg-start mt-4 pt-2">
+        <p class="small fw-bold mt-2 pt-1 mb-0">
+            <a href="/login" class="link-danger">LogOut</a>
+        </p>
+    </div>
+</div>
+
+<div th:include="fragments/components::bootstrap_script"/>
+
+</body>
+</html>

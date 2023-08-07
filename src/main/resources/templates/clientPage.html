@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <div th:include="fragments/components::header"></div>
+</head>
+
+<body>
+<div class="container mt-5">
+    <form method="POST" class="form-signin"  th:action="@{/clientPage}">
+
+        <h2 class="form-heading text-center">Products :</h2>
+
+        <table class="table">
+            <thread class="thead-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Quantity</th>
+                </tr>
+            </thread>
+            <tr th:each="product : ${products}">
+                <td th:text="${product.idProduct}"></td>
+                <td th:text="${product.productName}"></td>
+                <td th:text="${product.quantity}"></td>
+            </tr>
+        </table>
+        <div
+                th:if="${products.empty}">
+        </div>
+
+        <div class="text-center text-lg-start mt-4 pt-2">
+            <p class="small fw-bold mt-2 pt-1 mb-0">
+                <a href="/login" class="link-danger">LogOut</a>
+            </p>
+        </div>
+    </form>
+</div>
+
+<div th:include="fragments/components::bootstrap_script"/>
+
+</body>
+</html>
